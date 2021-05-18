@@ -18,16 +18,13 @@ import com.megacrit.cardcrawl.helpers.CardHelper;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import fryingPan.relics.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import fryingPan.cards.*;
 import fryingPan.characters.TheDefault;
 import fryingPan.events.IdentityCrisisEvent;
 import fryingPan.potions.PlaceholderPotion;
-import fryingPan.relics.BottledPlaceholderRelic;
-import fryingPan.relics.DefaultClickableRelic;
-import fryingPan.relics.PlaceholderRelic;
-import fryingPan.relics.PlaceholderRelic2;
 import fryingPan.util.IDCheckDontTouchPls;
 import fryingPan.util.TextureLoader;
 import fryingPan.variables.DefaultCustomVariable;
@@ -396,8 +393,10 @@ public class DefaultMod implements
         BaseMod.addRelicToCustomPool(new BottledPlaceholderRelic(), TheDefault.Enums.COLOR_GRAY);
         BaseMod.addRelicToCustomPool(new DefaultClickableRelic(), TheDefault.Enums.COLOR_GRAY);
 
+
         // This adds a relic to the Shared pool. Every character can find this relic.
         BaseMod.addRelic(new PlaceholderRelic2(), RelicType.SHARED);
+        BaseMod.addRelic(new FryingPan(), RelicType.SHARED);
 
         // Mark relics as seen - makes it visible in the compendium immediately
         // If you don't have this it won't be visible in the compendium until you see them in game

@@ -30,5 +30,13 @@
       ".",
       "Select a card to bottle for "
     ]
+  },
+  "fryingPan:FryingPan": {
+    "NAME": "Frying Pan",
+    "FLAVOR": "It compels you to hit things with it",
+    "DESCRIPTIONS": [
+      "All attack cards are now strike cards.",
+      "If a card is already a strike card, it does one more damage"
+    ]
   }
 }
