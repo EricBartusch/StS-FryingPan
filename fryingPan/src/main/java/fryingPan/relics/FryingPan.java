@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import fryingPan.DefaultMod;
 import fryingPan.util.TextureLoader;
 
+import static com.megacrit.cardcrawl.cards.AbstractCard.*;
 import static fryingPan.DefaultMod.makeRelicOutlinePath;
 import static fryingPan.DefaultMod.makeRelicPath;
 
@@ -21,20 +22,9 @@ public class FryingPan extends CustomRelic {
 
     @Override
     public void onPreviewObtainCard(AbstractCard c) {
-        if (c.type.equals(AbstractCard.CardType.ATTACK)) {
-            if(!c.name.toLowerCase().contains("strike")) {
+        if (c.type.equals(CardType.ATTACK)) {
+            if(!c.hasTag(CardTags.STRIKE)) {
                 c.name = c.name + " Strike";
-                c.tags.add(AbstractCard.CardTags.STRIKE);
-            }
-        }
-    }
-
-    @Override
-    public void onObtainCard(AbstractCard c) {
-        if (c.type.equals(AbstractCard.CardType.ATTACK)) {
-            if(!c.name.toLowerCase().contains("strike")) {
-                c.name = c.name + " Strike";
-                c.tags.add(AbstractCard.CardTags.STRIKE);
             }
         }
     }
@@ -42,15 +32,31 @@ public class FryingPan extends CustomRelic {
     @Override
     public void onEquip() {
         for (AbstractCard c: AbstractDungeon.player.masterDeck.getAttacks().group) {
-            if(!c.name.toLowerCase().contains("strike")) {
+            if(!c.hasTag(CardTags.STRIKE)) {
                 c.name = c.name + " Strike";
-                c.tags.add(AbstractCard.CardTags.STRIKE);
             }
         }
     }
+
+    @Override
+    public void onUnequip() {
+        for (AbstractCard c: AbstractDungeon.player.masterDeck.getAttacks().group) {
+            if(!c.hasTag(CardTags.STRIKE)) {
+                c.name = c.name + " Strike";
+            }
+        }
+    }
+
+    @Override
+    public void atPreBattle() {
+        for (AbstractCard c: AbstractDungeon.player.drawPile.getAttacks().group) {
+            c.tags.add(CardTags.STRIKE);
+        }
+    }
+
     @Override
     public float atDamageModify(float damage, AbstractCard c) {
-        return c.originalName.toLowerCase().contains("strike") ? damage + 1.0F : damage;
+        return c.tags.indexOf(CardTags.STRIKE) != c.tags.lastIndexOf(CardTags.STRIKE) ? damage + 1.0F : damage;
     }
 
 
