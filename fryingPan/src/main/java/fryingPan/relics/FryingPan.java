@@ -4,7 +4,9 @@ import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import fryingPan.DefaultMod;
+import fryingPan.patches.CardTagEnum;
 import fryingPan.util.TextureLoader;
 
 import static com.megacrit.cardcrawl.cards.AbstractCard.*;
@@ -24,7 +26,8 @@ public class FryingPan extends CustomRelic {
     public void onPreviewObtainCard(AbstractCard c) {
         if (c.type.equals(CardType.ATTACK)) {
             if(!c.hasTag(CardTags.STRIKE)) {
-                c.name = c.name + " Strike";
+                c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
+                c.tags.add(CardTagEnum.FRYING_STRIKE);
             }
         }
     }
@@ -33,7 +36,8 @@ public class FryingPan extends CustomRelic {
     public void onEquip() {
         for (AbstractCard c: AbstractDungeon.player.masterDeck.getAttacks().group) {
             if(!c.hasTag(CardTags.STRIKE)) {
-                c.name = c.name + " Strike";
+                c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
+                c.tags.add(CardTagEnum.FRYING_STRIKE);
             }
         }
     }
@@ -41,8 +45,8 @@ public class FryingPan extends CustomRelic {
     @Override
     public void onUnequip() {
         for (AbstractCard c: AbstractDungeon.player.masterDeck.getAttacks().group) {
-            if(!c.hasTag(CardTags.STRIKE)) {
-                c.name = c.name + " Strike";
+            if(c.hasTag(CardTagEnum.FRYING_STRIKE)) {
+                c.name = c.originalName;
             }
         }
     }
