@@ -48,8 +48,6 @@ public class FryingPan extends CustomRelic {
     public void onPreviewObtainCard(AbstractCard c) {
         if (c.type.equals(CardType.ATTACK) && !c.hasTag(CardTags.STRIKE)) {
             c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
-            c.tags.add(CardTagEnum.FRYING_STRIKE);
-            c.tags.add(CardTags.STRIKE);
         }
     }
 
