@@ -28,6 +28,7 @@ public class FryingPan extends CustomRelic {
             if(!c.hasTag(CardTags.STRIKE)) {
                 c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
                 c.tags.add(CardTagEnum.FRYING_STRIKE);
+                c.tags.add(CardTags.STRIKE);
             }
         }
     }
@@ -37,6 +38,8 @@ public class FryingPan extends CustomRelic {
         for (AbstractCard c: AbstractDungeon.player.masterDeck.getAttacks().group) {
             if(c.hasTag(CardTagEnum.FRYING_STRIKE)) {
                 c.name = c.originalName;
+                c.tags.remove(c.tags.indexOf(CardTagEnum.FRYING_STRIKE));
+                c.tags.remove(c.tags.indexOf(CardTags.STRIKE));
             }
         }
     }
@@ -46,19 +49,23 @@ public class FryingPan extends CustomRelic {
         if (c.type.equals(CardType.ATTACK) && !c.hasTag(CardTags.STRIKE)) {
             c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
             c.tags.add(CardTagEnum.FRYING_STRIKE);
-        }
-    }
-
-    @Override
-    public void atPreBattle() {
-        for (AbstractCard c: AbstractDungeon.player.drawPile.getAttacks().group) {
             c.tags.add(CardTags.STRIKE);
         }
     }
 
     @Override
+    public void onObtainCard(AbstractCard c) {
+        if (c.type.equals(CardType.ATTACK) && !c.hasTag(CardTags.STRIKE)) {
+            c.name = c.name + " " + CardLibrary.getCard("Strike_R").name;
+            c.tags.add(CardTagEnum.FRYING_STRIKE);
+            c.tags.add(CardTags.STRIKE);
+        }
+    }
+
+
+    @Override
     public float atDamageModify(float damage, AbstractCard c) {
-        return c.tags.indexOf(CardTags.STRIKE) != c.tags.lastIndexOf(CardTags.STRIKE) ? damage + 1.0F : damage;
+        return c.tags.contains(CardTags.STRIKE) && !c.tags.contains(CardTagEnum.FRYING_STRIKE) ? damage + 1.0F : damage;
     }
 
 
