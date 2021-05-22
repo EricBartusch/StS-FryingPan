@@ -1,14 +1,15 @@
 package fryingPan.patches;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDiscardEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToDrawPileEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndAddToHandEffect;
+import fryingPan.relics.FryingPan;
 
 import static com.megacrit.cardcrawl.cards.AbstractCard.*;
 
@@ -23,10 +24,11 @@ public class TempCardPatches
     {
         public static void Postfix(AbstractGameEffect __instance, AbstractCard card)
         {
-            if (AbstractDungeon.player.hasRelic("fryingPan:FryingPan") && card.type.equals(CardType.ATTACK) && !card.tags.contains(CardTags.STRIKE)) {
+            if (AbstractDungeon.player.hasRelic(FryingPan.ID) && card.type.equals(CardType.ATTACK) && !card.tags.contains(CardTags.STRIKE)) {
                 card.name = card.name + " " + CardLibrary.getCard("Strike_R").name;
                 card.tags.add(CardTags.STRIKE);
                 card.tags.add(CardTagEnum.FRYING_STRIKE);
+                AbstractDungeon.player.getRelic(FryingPan.ID).flash();
             }
         }
     }
