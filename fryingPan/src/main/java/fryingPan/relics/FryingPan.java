@@ -17,8 +17,8 @@ public class FryingPan extends CustomRelic {
 
     public static final String ID = DefaultMod.makeID("FryingPan");
 
-    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("placeholder_relic2.png"));
-    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("placeholder_relic2.png"));
+    private static final Texture IMG = TextureLoader.getTexture(makeRelicPath("fryingpan.png"));
+    private static final Texture OUTLINE = TextureLoader.getTexture(makeRelicOutlinePath("fryingpan.png"));
 
     public FryingPan() { super(ID, IMG, OUTLINE, RelicTier.SHOP, LandingSound.SOLID); }
 
