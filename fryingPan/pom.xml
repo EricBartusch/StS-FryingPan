@@ -4,7 +4,7 @@
     <groupId>fryingpan</groupId>
     <artifactId>FryingPan</artifactId> <!--Keep a note of this one: this is the ID used in the "auto add cards" method-->
     <name>Frying Pan</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>A relic that makes all attack cards strikes.</description>
 
     <properties>
