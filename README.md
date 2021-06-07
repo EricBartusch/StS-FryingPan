@@ -7,3 +7,4 @@ Found in shops.
 
 Synergizes with Strike Dummy and Perfected Strike.
 
+**ARCHIVED:** This relic is incorporated into the [Dumb Attack Pack](https://github.com/EricBartusch/StS-DumbAttackPack)
